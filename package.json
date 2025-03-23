@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "deploy": "next build && npx wrangler deploy"
+    "deploy": "next build && npx wrangler deploy --config wrangler.toml",
+    "deploy:prod": "next build && npx wrangler deploy --config wrangler-production.toml --env production"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.18.0",
