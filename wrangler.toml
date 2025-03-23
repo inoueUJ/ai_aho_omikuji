@@ -1,10 +1,10 @@
 name = "omikuji"
-main = "./.next/server/app/page.js"
+main = "./worker.js" # 新しいエントリポイントファイル
 compatibility_date = "2025-03-23"
 compatibility_flags = ["nodejs_compat"]
 
 [site]
-bucket = "./.next/static"
+bucket = "./.next"
 
 [build]
 command = "npm run build"

@@ -1,25 +1,21 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  output: "standalone",
+  // Cloudflare Workers向けの設定
+  output: 'export', // 静的エクスポートモードに変更
   outputFileTracingRoot: process.cwd(),
-  // Cloudflare向けの設定
-  serverExternalPackages: ['@opentelemetry/api'],
-  // Node.js組み込みモジュールを外部依存として扱う
+  // モジュール解決の問題を防ぐ
+  experimental: {
+    serverComponentsExternalPackages: [],
+  },
+  // 外部モジュールを明示的に除外
   webpack: (config, { isServer }) => {
     if (isServer) {
       config.externals = [
-        ...(config.externals || []),
-        'bufferutil',
+        ...(config.externals || []), 
+        'bufferutil', 
         'utf-8-validate',
-        'async_hooks',
-        'crypto',
-        'path',
-        'stream',
-        'url',
-        'util',
-        'fs',
-        'os'
+        '@opentelemetry/api' // エラーメッセージで示されたモジュール
       ];
     }
     return config;
