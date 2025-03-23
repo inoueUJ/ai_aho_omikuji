@@ -7,8 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "deploy": "next build && npx wrangler deploy --config wrangler.toml",
-    "deploy:prod": "next build && npx wrangler deploy --config wrangler-production.toml --env production"
+    "deploy": "npx wrangler deploy --config wrangler.toml",
+    "deploy:prod": "npx wrangler deploy --config wrangler-production.toml --env production"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.18.0",
@@ -18,6 +18,7 @@
     "react-dom": "^19.0.0"
   },
   "devDependencies": {
+    "@cloudflare/next-on-pages": "^1.13.10",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",

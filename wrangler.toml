@@ -1,5 +1,5 @@
-name = "ai-omikuji"
-main = "./.next/standalone/server.js"
+name = "omikuji"
+main = "./.next/server/app/page.js"
 compatibility_date = "2025-03-23"
 compatibility_flags = ["nodejs_compat"]
 
