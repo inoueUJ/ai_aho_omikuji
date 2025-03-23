@@ -1,0 +1,43 @@
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px) rotate(-5deg); }
+  75% { transform: translateX(5px) rotate(5deg); }
+}
+
+@keyframes shakeSticks {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+
+@keyframes pullOmikuji {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+  100% { transform: translateY(-40px); }
+}
+
+@keyframes resultAppear {
+  0% { transform: scale(0.5); opacity: 0; }
+  70% { transform: scale(1.1); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.animate-shake {
+  animation: shake 0.5s infinite;
+}
+
+.animate-shake-sticks {
+  animation: shakeSticks 0.3s infinite;
+}
+
+.animate-shake-sticks-delay {
+  animation: shakeSticks 0.3s infinite;
+  animation-delay: 0.1s;
+}
+
+.animate-pull-omikuji {
+  animation: pullOmikuji 2s forwards;
+}
+
+.animate-result-appear {
+  animation: resultAppear 0.5s forwards;
+}
