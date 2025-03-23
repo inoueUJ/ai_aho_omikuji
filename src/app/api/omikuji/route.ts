@@ -1,4 +1,5 @@
-import type { CacheEntry, OmikujiCache, fortuneLevels } from "@/types/omikuji";
+import type { CacheEntry, Fortune, OmikujiCache } from "@/types/omikuji";
+import { fortuneLevels } from "@/types/omikuji";
 import Anthropic from "@anthropic-ai/sdk";
 import { NextResponse } from "next/server";
 
@@ -37,21 +38,29 @@ function categorizeQuestion(question: string): string {
 		lowerQuestion.includes("キャリア")
 	) {
 		return "work";
-	} else if (
+	}
+
+	if (
 		lowerQuestion.includes("恋愛") ||
 		lowerQuestion.includes("彼氏") ||
 		lowerQuestion.includes("彼女")
 	) {
 		return "love";
-	} else if (
+	}
+
+	if (
 		lowerQuestion.includes("勉強") ||
 		lowerQuestion.includes("学校") ||
 		lowerQuestion.includes("試験")
 	) {
 		return "study";
-	} else if (lowerQuestion.includes("旅行") || lowerQuestion.includes("旅")) {
+	}
+
+	if (lowerQuestion.includes("旅行") || lowerQuestion.includes("旅")) {
 		return "travel";
-	} else if (lowerQuestion.includes("健康") || lowerQuestion.includes("病気")) {
+	}
+
+	if (lowerQuestion.includes("健康") || lowerQuestion.includes("病気")) {
 		return "health";
 	}
 
@@ -68,7 +77,7 @@ function generateCacheKey(question: string): string {
 }
 
 // キャッシュをクリーンアップする関数（古いエントリを削除）
-function cleanupCache() {
+function cleanupCache(): void {
 	const now = Date.now();
 
 	for (const [key, entry] of cache.entries()) {
@@ -149,14 +158,14 @@ export async function POST(request: Request) {
 		});
 
 		// レスポンスからJSONデータを抽出
-		let result;
+		let result: Fortune;
 
 		try {
 			const content = response.content[0].text;
 			// JSON部分を抽出（余分なテキストがある場合に備えて）
 			const jsonMatch = content.match(/\{[\s\S]*\}/);
 			if (jsonMatch) {
-				result = JSON.parse(jsonMatch[0]);
+				result = JSON.parse(jsonMatch[0]) as Fortune;
 			} else {
 				throw new Error("JSONデータが見つかりませんでした");
 			}
